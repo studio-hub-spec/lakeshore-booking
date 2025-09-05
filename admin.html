@@ -1,0 +1,26 @@
+
+{% extends "base.html" %}
+{% block content %}
+<h2>Admin Dashboard</h2>
+<div class="grid">
+<section>
+  <h3>Upcoming bookings</h3>
+  {% if upcoming %}
+  <table class="table"><thead><tr><th>Date</th><th>Time</th><th>Studio</th><th>Name</th><th>Status</th><th></th></tr></thead><tbody>
+    {% for b in upcoming %}
+    <tr>
+      <td>{{ b['date'] }}</td><td>{{ b['start_time'] }}–{{ b['end_time'] }}</td><td>{{ b['studio_name'] }}</td><td>{{ b['full_name'] }}</td><td>{{ b['status'] }}</td>
+      <td><form method="post" action="{{ url_for('admin_cancel_booking', booking_id=b['id']) }}" onsubmit="return confirm('Cancel this booking?');"><button class="btn btn-danger" type="submit">Cancel</button></form></td>
+    </tr>
+    {% endfor %}
+  </tbody></table>
+  {% else %}<p>No upcoming bookings.</p>{% endif %}
+</section>
+<aside>
+  <h3>Studios</h3>
+  <ul class="list">{% for s in studios %}<li><strong>{{ s['name'] }}</strong> — {{ s['price_per_hour']|money }}/hr</li>{% endfor %}</ul>
+  <a class="btn" href="{{ url_for('admin_new_studio') }}">Add new studio</a>
+  <p class="muted">Default admin user is <code>admin</code> / <code>admin123</code> (change via env).</p>
+</aside>
+</div>
+{% endblock %}
