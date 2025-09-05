@@ -1,0 +1,81 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ meta.title if meta else (BUSINESS_NAME ~ ' — Studios') }}</title>
+  <meta name="description" content="{{ meta.description if meta else 'Hourly studios for dance, photo, and masterclasses in Toronto.' }}">
+  {% if meta and meta.canonical %}<link rel="canonical" href="{{ meta.canonical }}">{% endif %}
+  <meta property="og:title" content="{{ meta.title if meta else BUSINESS_NAME }}">
+  <meta property="og:description" content="{{ meta.description if meta else '' }}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ meta.canonical if meta else BUSINESS_URL }}">
+  <meta property="og:site_name" content="{{ BUSINESS_NAME }}">
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "{{ BUSINESS_NAME }}",
+    "image": "{{ BUSINESS_URL }}/static/placeholder.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "{{ BUSINESS_STREET }}",
+      "addressLocality": "{{ BUSINESS_CITY }}",
+      "addressRegion": "{{ BUSINESS_REGION }}",
+      "postalCode": "{{ BUSINESS_POSTAL }}",
+      "addressCountry": "{{ BUSINESS_COUNTRY }}"
+    },
+    "telephone": "{{ BUSINESS_PHONE }}",
+    "email": "{{ BUSINESS_EMAIL }}",
+    "url": "{{ BUSINESS_URL }}",
+    "sameAs": ["{{ BUSINESS_INSTAGRAM }}"],
+    "areaServed": "Toronto"
+  }
+  </script>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a class="brand" href="{{ url_for('index') }}">Lakeshore <span>Creative</span> Studios</a>
+    <nav>
+      <a href="{{ url_for('index') }}">Studios</a>
+      <a href="{{ url_for('about') }}">About</a>
+      <a href="{{ url_for('contact') }}">Contact</a>
+      <a class="cta" href="{{ BUSINESS_INSTAGRAM }}" target="_blank" rel="noopener">Book via Instagram</a>
+      <a href="{{ url_for('admin_login') }}">Admin</a>
+    </nav>
+  </div>
+</header>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-wrap container">
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message|safe }}</div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<main class="container">
+  {% block content %}{% endblock %}
+</main>
+
+<footer>
+  <div class="container foot">
+    <div>
+      <strong>{{ BUSINESS_NAME }}</strong><br>
+      {{ BUSINESS_FULL_ADDR }}<br>
+      <a href="mailto:{{ BUSINESS_EMAIL }}">{{ BUSINESS_EMAIL }}</a> · <a href="tel:{{ BUSINESS_PHONE }}">{{ BUSINESS_PHONE }}</a>
+    </div>
+    <div>
+      <a href="{{ url_for('index') }}">Studios</a> · <a href="{{ url_for('about') }}">About</a> · <a href="{{ url_for('contact') }}">Contact</a><br>
+      <small>© {{ now.year }} {{ BUSINESS_NAME }} · <a href="/sitemap.xml">Sitemap</a> · <a href="/robots.txt">Robots</a></small>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

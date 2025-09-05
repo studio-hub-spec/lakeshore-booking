@@ -1,0 +1,12 @@
+
+{% extends "base.html" %}
+{% block content %}
+<h1>Contact</h1>
+<p>Questions about bookings, long-term rentals, or partnerships? Reach out — we’d love to help.</p>
+<ul class="contact">
+  <li>Email: <a href="mailto:{{ BUSINESS_EMAIL }}">{{ BUSINESS_EMAIL }}</a></li>
+  <li>Phone: <a href="tel:{{ BUSINESS_PHONE }}">{{ BUSINESS_PHONE }}</a></li>
+  <li>Instagram: <a href="{{ BUSINESS_INSTAGRAM }}" target="_blank" rel="noopener">{{ BUSINESS_INSTAGRAM }}</a></li>
+  <li>Address: {{ BUSINESS_FULL_ADDR }}</li>
+</ul>
+{% endblock %}
