@@ -1,0 +1,15 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lakeshore Creative Studios</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header><div class="container"><h1><a href="{{ url_for('index') }}">Lakeshore Creative Studios</a></h1><nav><a href="{{ url_for('index') }}">Studios</a> <a href="{{ url_for('admin_login') }}">Admin</a></nav></div></header>
+{% with messages = get_flashed_messages(with_categories=true) %}{% if messages %}<div class="flash-wrap container">{% for category, message in messages %}<div class="flash {{ category }}">{{ message|safe }}</div>{% endfor %}</div>{% endif %}{% endwith %}
+<main class="container">{% block content %}{% endblock %}</main>
+<footer><div class="container"><p>&copy; {{ now.year }} Lakeshore Creative Studios</p></div></footer>
+</body></html>
