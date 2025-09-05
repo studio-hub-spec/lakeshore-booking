@@ -1,0 +1,14 @@
+
+{% extends "base.html" %}
+{% block content %}
+<h2>You're booked!</h2>
+<p>Thanks, <strong>{{ b['full_name'] }}</strong>. Your booking is recorded.</p>
+<div class="card"><div class="card-body">
+  <p><strong>Studio:</strong> {{ b['studio_name'] }}</p>
+  <p><strong>Date:</strong> {{ b['date'] }} &nbsp; <strong>Time:</strong> {{ b['start_time'] }}–{{ b['end_time'] }}</p>
+  <p><strong>Price:</strong> {{ b['pph']|money }} / hr</p>
+  <a class="btn" href="{{ url_for('ics', booking_id=b['id']) }}">Add to Calendar (.ics)</a>
+  <p class="muted">Confirmation sent to: {{ b['email'] }}</p>
+</div></div>
+<p><a href="{{ url_for('index') }}" class="back">← Back to studios</a></p>
+{% endblock %}

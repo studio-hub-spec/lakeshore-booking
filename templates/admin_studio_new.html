@@ -1,0 +1,15 @@
+
+{% extends "base.html" %}
+{% block content %}
+<h2>New Studio</h2>
+<form method="post" class="form">
+  <label>Name <input type="text" name="name" required></label>
+  <div class="row">
+    <label>Size (sq ft) <input type="number" name="size" min="0" step="1"></label>
+    <label>Price per hour (CAD) <input type="number" name="price" min="1" step="0.01" required></label>
+  </div>
+  <label>Description <textarea name="description"></textarea></label>
+  <label>Photo URL (optional) <input type="url" name="photo_url"></label>
+  <button class="btn" type="submit">Create studio</button>
+</form>
+{% endblock %}
