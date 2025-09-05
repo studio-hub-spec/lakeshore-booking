@@ -94,7 +94,11 @@ def overlap(a_start, a_end, b_start, b_end):
     return max(a_start, b_start) < min(a_end, b_end)
 
 @app.template_filter("money")
-def money(v): return f"${v:,.2f}"
+def money(v):
+    try:
+        return f"${float(v):,.2f}"
+    except (ValueError, TypeError):
+        return "$0.00"
 
 @app.context_processor
 def inject_globals():
