@@ -1,0 +1,32 @@
+
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <h1>Hourly studios in Mimico & Long Branch</h1>
+  <p>Dance • Photo • Masterclasses — mirrors, Marley floor, PA system, backdrops. Instant booking.</p>
+  <a class="btn" href="#studios">See studios & pricing</a>
+</section>
+
+<section id="studios" class="cards">
+  {% for s in studios %}
+  <article class="card">
+    <div class="card-media" style="background-image:url('{{ s['photo_url'] or url_for('static', filename='placeholder.jpg') }}');"></div>
+    <div class="card-body">
+      <h2>{{ s['name'] }}</h2>
+      <p>{{ s['description'] }}</p>
+      <p><strong>{{ s['price_per_hour']|money }}</strong> / hour · {{ s['size_sqft'] or "—" }} sq ft</p>
+      <a class="btn" href="{{ url_for('studio', studio_id=s['id']) }}">Check availability</a>
+    </div>
+  </article>
+  {% endfor %}
+</section>
+
+<section class="testimonials">
+  <h3>Loved by creators & instructors</h3>
+  <div class="grid-3">
+    <blockquote>“Perfect mirrors and sound. My students loved it.”<cite>— Dance coach, Etobicoke</cite></blockquote>
+    <blockquote>“Great natural light & backdrops for headshots.”<cite>— Photographer, Toronto</cite></blockquote>
+    <blockquote>“Booked a workshop for 20 — easy and smooth.”<cite>— Instructor, Mimico</cite></blockquote>
+  </div>
+</section>
+{% endblock %}
